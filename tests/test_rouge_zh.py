@@ -5,7 +5,7 @@ from rougescore import rouge_n
 from sumeval.metrics.rouge import RougeCalculator
 
 
-class TestRougeJA(unittest.TestCase):
+class TestRougeZH(unittest.TestCase):
 
     DATA_DIR = os.path.join(os.path.dirname(__file__), "data/rouge")
 

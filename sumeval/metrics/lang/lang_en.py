@@ -9,6 +9,13 @@ class LangEN(BaseLang):
         self._symbol_replace = re.compile(r"[^A-Za-z0-9-]")
         self._valid_word = re.compile(r"^[A-Za-z0-9$]")
 
+    def load_parser(self):
+        if self._PARSER is None:
+            import spacy
+            self._PARSER = spacy.load("en_core_web_sm")
+        return self._PARSER
+
+
     def tokenize(self, text):
         return text.split(" ")
 

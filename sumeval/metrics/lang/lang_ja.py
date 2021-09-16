@@ -18,11 +18,18 @@ class LangJA(BaseLang):
     def _set_tokenizer(self):
         try:
             import MeCab
+            import ipadic
+
+            # https://gist.github.com/polm/b305d500df28f190e346d50447682ec6
+            # -Ochasen の出力フォーマットを直接指定する
+            CHASEN_ARGS = r' -F "%m\t%f[7]\t%f[6]\t%F-[0,1,2,3]\t%f[4]\t%f[5]\n"'
+            CHASEN_ARGS += r' -U "%m\t%m\t%m\t%F-[0,1,2,3]\t\t\n"'
 
             class Tokenizer():
 
                 def __init__(self):
-                    self.tagger = MeCab.Tagger("-Ochasen")
+                    #self.tagger = MeCab.Tagger("-Ochasen")
+                    self.tagger = MeCab.Tagger(ipadic.MECAB_ARGS + CHASEN_ARGS)
 
                 def tokenize(self, text):
                     self.tagger.parse("")

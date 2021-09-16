@@ -2,7 +2,7 @@
 
 pip install --upgrade pip
 
-pip install mecab-python3
+pip install mecab-python3 ipadic
 if [ ! -d /usr/share/mecab ]; then
   sudo apt install mecab libmecab-dev git make curl xz-utils file
   git clone --depth 1 https://github.com/neologd/mecab-unidic-neologd.git

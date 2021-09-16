@@ -11,10 +11,9 @@ fi
 
 pip install spacy ja-ginza ja-ginza-electra
 
-pip install -r requirement-test.txt
+pip install -r requirements-test.txt
 
-git clone https://github.com/morioka/sumeval.git
-cd sumeval
+#git clone https://github.com/morioka/sumeval.git
 pip install --editable .
 
 python -m spacy download en_core_web_sm

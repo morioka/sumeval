@@ -10,7 +10,7 @@ beautifulsoup4>=4.7.1
 # Basic Element
 spacy>=2.0.0
 # For Chinese
-jieba>=0.39
-pyhanlp==0.1.45
+#jieba>=0.39
+#pyhanlp==0.1.45
 # For Japanese
 janome>=0.3.9

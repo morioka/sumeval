@@ -33,13 +33,13 @@ class BaseLang():
         for token in doc:
             # chunk level dependencies
             if token.pos == NOUN and token.head.pos in [VERB, ADJ]:
-                print("a.{}=({})=>{}".format(token, token.dep_, token.head))
+                #print("a.{}=({})=>{}".format(token, token.dep_, token.head))
                 be = BasicElement(token.text, token.head.lemma_,
                                   token.dep_,)
                 bes.append(be)
-                print(be)
+                #print(be)
             elif token.pos in [VERB, ADJ] and token.head.pos == NOUN:
-                print("b.{}=({})=>{}".format(token, token.dep_, token.head))
+                #print("b.{}=({})=>{}".format(token, token.dep_, token.head))
                 be = BasicElement(token.head.text, token.lemma_,
                                   token.dep_,)
                 bes.append(be)

@@ -1,7 +1,11 @@
-from sacrebleu import corpus_bleu, TOKENIZERS, DEFAULT_TOKENIZER
+from sacrebleu import corpus_bleu
 from sumeval.metrics.lang.base_lang import BaseLang
 from sumeval.metrics.lang import get_lang
 
+try:
+    from sacrebleu import TOKENIZERS, DEFAULT_TOKENIZER
+except ImportError:  # sacrebleu>=2.0.0
+    from sacrebleu.metrics import BLEU
 
 class BLEUCalculator():
 
@@ -20,14 +24,20 @@ class BLEUCalculator():
             self.lang = lang.lang
             self._lang = lang
 
-        self._tokenizer = DEFAULT_TOKENIZER
+        try:
+            self._tokenizer = DEFAULT_TOKENIZER
+        except NameError:  # sacrebleu>=2.0.0
+            self._tokenizer = BLEU.TOKENIZER_DEFAULT
         if self.lang == "ja":
             def tokenizer_ja(text):
                 words = self._lang.tokenize_with_preprocess(text)
                 return " ".join(words)
 
-            TOKENIZERS["ja"] = tokenizer_ja
-            self._tokenizer = "ja"
+            try:
+                TOKENIZERS["ja"] = tokenizer_ja
+                self._tokenizer = "ja"
+            except NameError:  # sacrebleu>=2.0.0
+                self._tokenizer = "ja-mecab"
         elif self.lang == "zh":
             self._tokenizer = "zh"
 
